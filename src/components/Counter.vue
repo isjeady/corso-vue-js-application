@@ -20,7 +20,7 @@ export default {
   name: 'Counter',
   data () {
     return {
-      count : 5
+      count : 0
     }
   }
 }

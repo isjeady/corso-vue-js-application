@@ -42,7 +42,7 @@ describe('Counter.vue', () => {
     expect(wrapper.vm.count).toBe(0);
   });
 
-  it.only('Contatore Decrement Invisible quando 0', () => {
+  it('Contatore Decrement Invisible quando 0', () => {
     wrapper.setData({
       count : 2
     });
