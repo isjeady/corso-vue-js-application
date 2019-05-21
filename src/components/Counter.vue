@@ -3,8 +3,13 @@
     <div>
     <span class="count" v-text="count"></span>
     </div>
-    <div>
-    <button @click="count++" class="btn btn-dark">Counter ++</button>
+    <div class="row">
+      <div class="col-6">
+        <button @click="count++" class="btn btn-dark increment">Counter ++</button>
+      </div>
+      <div class="col-6">
+       <button @click="count > 0 && count-- " v-show="count > 0" class="btn btn-dark decrement">Counter --</button>
+      </div>
     </div>
   </div>
 </template>
@@ -15,7 +20,7 @@ export default {
   name: 'Counter',
   data () {
     return {
-      count : 0
+      count : 5
     }
   }
 }
