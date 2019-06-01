@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Counter from './components/Counter.vue'
 import ToDo from './components/ToDo.vue'
+import Coupon from './components/Coupon.vue'
 
 Vue.use(Router)
 
@@ -26,12 +27,9 @@ export default new Router({
       name: 'todo',
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      path: '/coupon',
+      component: Coupon,
+      name: 'coupon',
+    },
   ]
 })

@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
     "test:unit:watch": "vue-cli-service test:unit --watchAll",
-    "test:unit:watch:single": "vue-cli-service test:unit --watch Counter.test.js"
+    "test:unit:watch:single": "vue-cli-service test:unit --watch Coupon.test.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
