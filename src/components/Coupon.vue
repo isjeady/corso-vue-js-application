@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Coupon :{{code}}</h3>
+    <h3>Coupon :{{selCode}}</h3>
     <input type="text" class="coupon-code" v-model="code" @input="validate">
     <p v-text="feedback"></p>
   </div>
@@ -33,8 +33,10 @@ export default {
             selectedCoupon () {
                 return this.coupons.find(coupon => coupon.code == this.code);
             },
-            discount () {
-                return this.selectedCoupon.discount;
+            selCode () {
+                if (this.valid) {
+                  return this.selectedCoupon.code;
+                }
             },
             message () {
                 return this.selectedCoupon.message;
