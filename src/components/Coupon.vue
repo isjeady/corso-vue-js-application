@@ -53,7 +53,7 @@ export default {
         this.valid = !! this.selectedCoupon;
 
         if (this.valid) {
-            this.$emit('scontoEvento', this.discount);
+            this.$emit('scontoEvento', this.selectedCoupon.discount);
         }
     }
   }
