@@ -16,10 +16,15 @@
             <button id="cancel" @click="cancel">Cancel</button>
             <button id="update" @click="update">Update</button>
         </div>
+
+        <div v-if="success">Aggiornato con successo...</div>
+        <div v-if="error">Errore di Sistema...</div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
     export default {
         props: ['dataQuestion'],
         data () {
@@ -29,7 +34,9 @@
                     title: this.dataQuestion.title,
                     body: this.dataQuestion.body,
                 },
-                editing: false
+                editing: false,
+                success: false,
+                error: false
             };
         },
         methods: {
@@ -37,8 +44,19 @@
                 this.editing = false;
             },
             update () {
-                this.question.title = this.form.title;
-                this.question.body = this.form.body;
+                console.log('UPDATE');
+            
+                axios.post('questions/1',this.form).then(({data}) => {
+                    console.log(data.success);
+                    if(data.success){
+                        this.success = true;
+                        this.question.title = this.form.title;
+                        this.question.body = this.form.body;
+                    }
+                }).catch((error) => {
+                    this.error = true;
+                });
+                
                 this.editing = false;
             }
         }
