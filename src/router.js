@@ -7,6 +7,13 @@ import Coupon from './components/Coupon.vue'
 
 Vue.use(Router)
 
+function dynamicPropsFn (route) {
+  return {
+    title: route.params.title,
+    body: route.params.body
+  }
+}
+
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -30,6 +37,6 @@ export default new Router({
       path: '/coupon',
       component: Coupon,
       name: 'coupon',
-    },
+    }
   ]
 })
