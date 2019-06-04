@@ -3,19 +3,22 @@ import VueI18n from 'vue-i18n'
 
 Vue.use(VueI18n);
 import it from './it.js';
+import en from './en.js';
 
 
 const i18n = new VueI18n({
   locale: 'it',
   messages: {
-    'it': it
+    'it': it,
+    'en': en
   }
 });
 
 // Hot updates
 if (module.hot) {
-    module.hot.accept(['./it'], function () {
+    module.hot.accept(['./it','./en'], function () {
       i18n.setLocaleMessage('it', require('./it').default)
+      i18n.setLocaleMessage('en', require('./en').default)
       // Or the following hot updates via $i18n property
       // app.$i18n.setLocaleMessage('en', require('./en').default)
     })

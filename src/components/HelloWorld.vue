@@ -3,7 +3,7 @@
     <h1 class="h1-text">{{ msg }}</h1>
     <h4>{{ $t('msg.welcome',{ username : name }) }}</h4>
     <p>
-      A description of someone or something is an account which explains what they are or what they look like.
+     
       {{ $t('msg.description') }}
     </p>
   </div>
