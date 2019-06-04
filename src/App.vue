@@ -7,6 +7,8 @@
 
 
 <script>
+
+
 import Navigator from '@/views/Navigator.vue'
 export default {
   name : 'app',

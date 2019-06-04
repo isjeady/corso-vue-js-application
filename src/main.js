@@ -5,6 +5,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
+import FlagIcon from 'vue-flag-icon'
+Vue.use(FlagIcon);
+
 new Vue({
   router,
   store,
