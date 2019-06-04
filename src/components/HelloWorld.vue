@@ -17,6 +17,9 @@
       <p>{{ $d(new Date(), 'short') }}</p>
       <p>{{ $d(new Date(), 'long' ) }}</p>
       <hr>
+      <h3>Currency</h3>
+      <p>{{ $n(100, 'currency') }}</p>
+      <hr>
   </div>
 </template>
 
