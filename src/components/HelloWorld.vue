@@ -6,6 +6,13 @@
      
       {{ $t('msg.description') }}
     </p>
+
+    <h3>Plurali</h3>
+    <h2> {{ $tc('msg.car') }}</h2>
+    <h2> {{ $tc('msg.car',5) }}</h2>
+    <h2> {{ $tc('msg.apple',5) }}</h2>
+    <h2> {{ $tc('msg.apple',0) }}</h2>
+    <h2> {{ $tc('msg.apple',1) }}</h2>
   </div>
 </template>
 
