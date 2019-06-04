@@ -3,16 +3,15 @@
     <router-link :to="{ name : 'home'}">Home</router-link> |
     <router-link :to="{ name : 'counter'}">Counter</router-link> |
 
-    <select v-model="selected">
-      <option value="it">Italiano</option>
-      <option value='gb'>English</option>
-      <option value="es">Spagnolo</option>
+    <select class="form-control" v-model="$i18n.locale" >
+      <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang.key">{{ lang.name }}</option>
     </select>
+
     <br>
-    <span>Selected: {{ selected }}</span>
+    <span>Selected: {{ selectedLang }}</span>
 
     <div style="font-size:70px">
-        <flag :iso="selected" :squared="false"/>
+        <flag :iso="selectedLang.flag" :squared="false"/>
     </div>
 
     <hr>
@@ -27,11 +26,16 @@ export default {
   name: 'navigator',
   data (){
     return {
-      selected : 'it'
+      langs: [
+          {name: 'Italiano', key: 'it', flag : 'it'}, 
+          {name: 'English' , key: 'en' , flag : 'gb'}
+      ]
     }
   },
   computed : {
-
+      selectedLang: function(){
+          return this.langs.find(el => el.key == this.$i18n.locale);
+      }
   }
 }
 </script>
