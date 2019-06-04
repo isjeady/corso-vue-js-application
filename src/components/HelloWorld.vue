@@ -5,6 +5,10 @@
     <p>
       {{ $t('msg.description') }}
     </p>
+    <i18n path="msg.description_2" tag="h1" for="input-ref">
+      <br place="break">
+      <a href="http://www.google.it" place="action">{{ $t('msg.link')}}</a>
+    </i18n>
     <hr>
       <h3>Plurali</h3>
       <h4> {{ $tc('msg.car') }}</h4>
