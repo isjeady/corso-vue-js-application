@@ -9,6 +9,8 @@
 
     <br>
     <span>Selected: {{ selectedLang }}</span>
+    <br>
+    <span>browLang: {{ browLang }}</span>
 
     <div style="font-size:70px">
         <flag :iso="selectedLang.flag" :squared="false"/>
@@ -35,6 +37,9 @@ export default {
   computed : {
       selectedLang: function(){
           return this.langs.find(el => el.key == this.$i18n.locale);
+      },
+      browLang: function(){
+          return (navigator.language).substr(0,2);
       }
   }
 }

@@ -9,7 +9,7 @@ import numberFormats from './numberFormats.js';
 
 
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: (navigator.language).substr(0,2),
   fallbackLocale : 'en',
   dateTimeFormats,
   numberFormats,
