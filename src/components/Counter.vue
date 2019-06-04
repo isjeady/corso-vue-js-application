@@ -4,7 +4,7 @@
     <span class="count" v-text="count"></span>
     </div>
     <div>
-    <button @click="count++" class="btn btn-dark">Counter ++</button>
+    <button @click="count++" class="btn btn-dark">{{ $t('msg.counter') }} ++</button>
     </div>
   </div>
 </template>
