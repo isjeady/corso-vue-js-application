@@ -27,7 +27,7 @@ export default {
   name: 'navigator',
   data (){
     return {
-      selected : 'A'
+      selected : 'it'
     }
   },
   computed : {
