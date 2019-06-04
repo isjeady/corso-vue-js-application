@@ -3,16 +3,20 @@
     <h1 class="h1-text">{{ msg }}</h1>
     <h4>{{ $t('msg.welcome',{ username : name }) }}</h4>
     <p>
-     
       {{ $t('msg.description') }}
     </p>
-
-    <h3>Plurali</h3>
-    <h2> {{ $tc('msg.car') }}</h2>
-    <h2> {{ $tc('msg.car',5) }}</h2>
-    <h2> {{ $tc('msg.apple',5) }}</h2>
-    <h2> {{ $tc('msg.apple',0) }}</h2>
-    <h2> {{ $tc('msg.apple',1) }}</h2>
+    <hr>
+      <h3>Plurali</h3>
+      <h4> {{ $tc('msg.car') }}</h4>
+      <h4> {{ $tc('msg.car',5) }}</h4>
+      <h4> {{ $tc('msg.apple',5) }}</h4>
+      <h4> {{ $tc('msg.apple',0) }}</h4>
+      <h4> {{ $tc('msg.apple',1) }}</h4>
+      <hr>
+      <h3>DateTime</h3>
+      <p>{{ $d(new Date(), 'short') }}</p>
+      <p>{{ $d(new Date(), 'long' ) }}</p>
+      <hr>
   </div>
 </template>
 

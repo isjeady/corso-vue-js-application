@@ -4,11 +4,13 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n);
 import it from './it.js';
 import en from './en.js';
+import dateTimeFormats from './dateTimeFormats.js';
 
 
 const i18n = new VueI18n({
   locale: 'en',
   fallbackLocale : 'en',
+  dateTimeFormats,
   messages: {
     'it': it,
     'en': en
