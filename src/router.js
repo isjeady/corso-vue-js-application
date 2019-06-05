@@ -29,7 +29,7 @@ export default new Router({
       component: CategoryView,
       children: [
         {
-          path: ':keytab',
+          path: ':keypost',
           name : 'post',
           component: PostView
         }

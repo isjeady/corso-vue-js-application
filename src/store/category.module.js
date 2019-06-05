@@ -3,7 +3,7 @@ import {sleep} from '@/lib/util';
 import {catJson} from '@/jsonresponse';
 
 const state = {
-    categories : {},
+    categories : [],
 };
 
 const getters = {

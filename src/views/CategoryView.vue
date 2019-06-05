@@ -4,8 +4,15 @@
         <h4>{{ category.description }}</h4>
         <loader :loading="loading" loaderText="Loading..."></loader>  
         <div v-if="!loading">
-          <h1>Posts</h1>
-          {{ getPosts }}
+          <h3>Posts</h3>
+          <template v-for="(post,index) in getPosts">
+              <router-link :to="{ name : 'post' , params : { keypost : post.key}}" :key="'menu' + index" >
+                  {{ post.name }}
+              </router-link>
+              <hr>
+          </template>
+
+          <router-view></router-view>
         </div>
     </div>
 </template>

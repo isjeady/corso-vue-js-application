@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <h1>CategoryView</h1>
-        <loader :loading="loading" loaderText="Loading..."></loader>  
+    <div v-if="post">
+        <h1>PostView</h1>
+        {{ post }}
     </div>
     
   </div>
@@ -26,11 +26,16 @@ export default {
   
   },
   computed : {
-      /*
-        ...mapGetters({
-            'categories' : 'category/getCategories',
-        }),
-        */
+      paramKey: function() {
+          return this.$route.params.keypost;
+      },
+       post: function() {
+        return this.getPost(this.paramKey);
+      },
+      ...mapGetters({
+            'getPost' : 'post/getPost',
+      }),
+
   },
   methods : {
       /*
