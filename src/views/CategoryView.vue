@@ -1,11 +1,13 @@
 <template>
-    <div>
-        <h1>CategoryView : {{ paramKey }}</h1>
-        <h1>{{ category }}</h1>
+    <div v-if="category">
+        <h1>{{ category.name }}</h1>
+        <h4>{{ category.description }}</h4>
         <loader :loading="loading" loaderText="Loading..."></loader>  
+        <div v-if="!loading">
+          <h1>Posts</h1>
+          {{ getPosts }}
+        </div>
     </div>
-    
-  </div>
 </template>
 
 
@@ -23,8 +25,11 @@ export default {
       loading : true,
     }
   },
-  beforeMount() {
-  
+  mounted() {
+        this.checkPost();
+  },
+  updated() {
+        this.checkPost();
   },
   computed : {
       paramKey: function() {
@@ -32,22 +37,28 @@ export default {
       },
       ...mapGetters({
             'getCategory' : 'category/getCategory',
+            'getPosts' : 'post/getPosts',
       }),
       category: function() {
-        var c = this.getCategory(this.paramKey);
-        if(c){
-          return c;
-        }else{
-          this.$router.push('/');
-        }
+        return this.getCategory(this.paramKey);
       },
   },
   methods : {
-      /*
       ...mapActions({
-          'fetchCategories' : 'category/fetchCategories',
+          'fetchPosts' : 'post/fetchPosts',
       }),
-      */
+      checkPost(){
+        if(!this.getCategory(this.paramKey)){
+          this.$router.push('/');
+        }else{
+          var category = this.getCategory(this.paramKey);
+          this.fetchPosts({cat: category.id}).then(() => {
+                  this.loading = false;       
+          }).catch((error) => {
+                this.loading = false;         
+          })
+        }
+      }
   }
 }
 </script>

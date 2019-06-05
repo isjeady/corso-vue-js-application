@@ -4,7 +4,10 @@
 
       <nav id="sidebar">
 
-          <a href="https://isjeady.com" target="_blank"><img src="https://isjeady.com/wp-content/uploads/2018/09/logoDEF.png" width="100%"></a>
+          <router-link tag="a" :to="'/'">
+           <img src="https://isjeady.com/wp-content/uploads/2018/09/logoDEF.png" width="100%">
+          </router-link>
+
           <loader :loading="loading" loaderText="Loading..."></loader>
           
           <div v-if="!loading">

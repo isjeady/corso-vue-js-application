@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 
 import category from './category.module';
-//import post from './post.module';
+import post from './post.module';
 
 
 Vue.use(Vuex);
@@ -11,6 +11,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     category,
-    //post,
+    post,
   }
 });
