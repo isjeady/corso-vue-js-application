@@ -28,6 +28,10 @@
 
     <div class="row">
       <div class="col-8">
+        <button class="btn btn-success" @click="reset">
+          Reset
+        </button>
+        <hr>
         <h3>Drag & Drop Area</h3>
           <draggable class="list-group" tag="ul" :list="listClone" v-bind="dragOptions" >
             <transition-group type="transition" name="flip-list" >
