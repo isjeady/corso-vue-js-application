@@ -9,7 +9,7 @@
       </nav>
 
       <div id="content">
-         <loader :loading="loading" loaderText="Loading..."></loader>
+        <loader :loading="loading" loaderText="Loading..."></loader>
         <router-view v-if="!loading" />
       </div>
 
@@ -22,6 +22,7 @@
 <script>
 import Loader from '@/components/Loader.vue'
 import Navigator from '@/views/Navigator.vue'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name : 'app',
@@ -33,6 +34,14 @@ export default {
     return {
       loading : true
     }
+  },
+  beforeMount() {
+    this.fetchCategories();
+  },
+  methods : {
+      ...mapActions({
+          'fetchCategories' : 'category/fetchCategories',
+      }),
   }
 }
 </script>
