@@ -27,6 +27,12 @@
 
     <div class="row">
       <div class="col-8">
+          <h3>Drag & Drop Area</h3>
+          <draggable class="list-group" tag="ul" :list="listValues" v-bind="dragOptions" >
+              <li class="list-group-item" v-for="element in listValues" :key="element.key">
+                {{ element.key + ' - ' +element.name }}
+              </li>
+          </draggable>
        
       </div>
       <div class="col-4">
@@ -69,11 +75,25 @@ export default {
    
   },
   computed: {
-    
+    dragOptions() {
+      return {
+        disabled: false,
+        ghostClass: "ghost",
+        sort : false,
+        group :{ name: 'people', pull: 'clone', put: false }
+      };
+    }
   }
 };
 </script>
 
 <style>
-
+.ghost {
+  opacity: 0.1;
+  background: #00f752;
+} 
+.list-group-item {
+  text-align: left;
+  cursor: move;
+}
 </style>
