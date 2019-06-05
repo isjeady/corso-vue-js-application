@@ -31,7 +31,9 @@
         <h3>Drag & Drop Area</h3>
           <draggable class="list-group" tag="ul" :list="listClone" v-bind="dragOptions" >
             <transition-group type="transition" name="flip-list" >
-              <li class="list-group-item" v-for="element in listClone" :key="element.key">
+              <li @drop="dropped(element)" class="list-group-item" v-for="element in listClone" :key="element.key">
+                <i class="material-icons" v-if="!element.dropped">drag_indicator</i>
+                <i class="material-icons" v-if="element.dropped">access_time</i>
                 {{ element.key + ' - ' +element.name }}
               </li>
             </transition-group>
@@ -76,6 +78,11 @@ export default {
   methods: {
     reset() {
       this.listClone = JSON.parse(JSON.stringify(this.listValues));
+      this.listClone.forEach(el => Vue.set(el,'dropped',false));
+    },
+    dropped(element) {
+      this.listClone.forEach(el => el.dropped = false);
+      element.dropped = ! element.dropped;
     },
   },
   computed: {
