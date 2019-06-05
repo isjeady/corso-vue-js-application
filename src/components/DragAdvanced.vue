@@ -13,14 +13,19 @@
               <th scope="col">Sex</th>
             </tr>
           </thead>
-          <tbody>
+          <draggable
+            :list="listNew"
+            group="users"
+            tag="tbody"
+            @change="log"
+          >
               <tr v-for="element in listNew" :key="element.key">
                 <th scope="row">{{ element.key  }}</th>
                 <td> {{ element.name }}</td>
                 <td> {{ element.lastname }}</td>
                 <td> {{ element.sex }}</td>
               </tr>
-          </tbody>
+          </draggable>
         </table>
       </div>
     </div>
@@ -72,7 +77,9 @@ export default {
   mounted(){
   },
   methods: {
-   
+    log: function(evt) {
+      window.console.log(evt);
+    },
   },
   computed: {
     dragOptions() {
@@ -80,7 +87,7 @@ export default {
         disabled: false,
         ghostClass: "ghost",
         sort : false,
-        group :{ name: 'people', pull: 'clone', put: false }
+        group :{ name: 'users', pull: 'clone', put: false }
       };
     }
   }
