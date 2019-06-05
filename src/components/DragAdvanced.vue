@@ -78,14 +78,17 @@ export default {
         { key : '1845' , name : 'Laura', lastname : 'Rossi', sex :'F'},
         { key : '3695' , name : 'Sonia', lastname : 'Neri', sex :'F'},
       ],
-      listNew : []
+      listNew : [],
+      listValuesBackup : []
     };
   },
   mounted(){
+    this.listValuesBackup = JSON.parse(JSON.stringify(this.listValues));
   },
   methods: {
     reset() {
       this.listNew = [];
+      this.listValues = JSON.parse(JSON.stringify(this.listValuesBackup))
     },
     log: function(evt) {
       window.console.log(evt);
@@ -97,7 +100,7 @@ export default {
         disabled: false,
         ghostClass: "ghost",
         sort : false,
-        group :{ name: 'users', pull: 'clone', put: false }
+        group :{ name: 'users', put: true }
       };
     }
   }
