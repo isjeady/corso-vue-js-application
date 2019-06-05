@@ -3,7 +3,7 @@
 
     <div class="row">
       <div class="col-12">
-        <h3>Drag & Drop Sample - List</h3>
+        <h3>Drag & Drop Sample - List Clone</h3>
         <table class="table">
           <thead>
             <tr>
@@ -14,7 +14,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="element in listValues" :key="element.key">
+            <tr v-for="element in listClone" :key="element.key">
               <th scope="row">{{ element.key  }}</th>
               <td> {{ element.name }}</td>
               <td> {{ element.lastname }}</td>
@@ -50,10 +50,12 @@ export default {
     };
   },
   mounted(){
-    
+    this.reset();
   },
   methods: {
-    
+    reset() {
+      this.listClone = JSON.parse(JSON.stringify(this.listValues));
+    },
   },
   computed: {
     
