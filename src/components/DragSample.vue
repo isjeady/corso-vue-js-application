@@ -30,9 +30,11 @@
       <div class="col-8">
         <h3>Drag & Drop Area</h3>
           <draggable class="list-group" tag="ul" :list="listClone" v-bind="dragOptions" >
-            <li class="list-group-item" v-for="element in listClone" :key="element.key">
-              {{ element.key + ' - ' +element.name }}
-            </li>
+            <transition-group type="transition" name="flip-list" >
+              <li class="list-group-item" v-for="element in listClone" :key="element.key">
+                {{ element.key + ' - ' +element.name }}
+              </li>
+            </transition-group>
           </draggable>
       </div>
       <div class="col-4">
@@ -88,6 +90,15 @@ export default {
 </script>
 
 <style>
+.ghost {
+  opacity: 0.1;
+  background: #00f752;
+} 
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+
 .list-group-item {
   text-align: left;
   cursor: move;
