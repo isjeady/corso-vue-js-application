@@ -26,6 +26,22 @@
     </div>
 
 
+    <div class="row">
+      <div class="col-8">
+          <li class="list-group-item" v-for="element in listClone" :key="element.key">
+            {{ element.key + ' - ' +element.name }}
+          </li>
+      </div>
+      <div class="col-4">
+        <h3>listValues</h3>
+          <code>{{ listValues }}</code>
+        <hr>
+        <h3>listClone</h3>
+          <code>{{ listClone }}</code>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -64,5 +80,8 @@ export default {
 </script>
 
 <style>
-
+.list-group-item {
+  text-align: left;
+  cursor: move;
+}
 </style>
