@@ -19,6 +19,9 @@
             tag="tbody"
             @change="log"
           >
+               <th v-if="listNew.length == 0" colspan="4" class="dragarea">
+                Cols - Drag & Drop Area
+              </th>
               <tr v-for="element in listNew" :key="element.key">
                 <th scope="row">{{ element.key  }}</th>
                 <td> {{ element.name }}</td>
@@ -32,6 +35,10 @@
 
     <div class="row">
       <div class="col-8">
+          <button class="btn btn-success" @click="reset">
+            Reset
+          </button>
+          <hr>
           <h3>Drag & Drop Area</h3>
           <draggable class="list-group" tag="ul" :list="listValues" v-bind="dragOptions" >
               <li class="list-group-item" v-for="element in listValues" :key="element.key">
@@ -77,6 +84,9 @@ export default {
   mounted(){
   },
   methods: {
+    reset() {
+      this.listNew = [];
+    },
     log: function(evt) {
       window.console.log(evt);
     },
@@ -95,6 +105,9 @@ export default {
 </script>
 
 <style>
+.dragarea {
+  background: #00f75259;
+} 
 .ghost {
   opacity: 0.1;
   background: #00f752;
