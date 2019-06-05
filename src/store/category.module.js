@@ -4,8 +4,6 @@ import {catJson} from '@/jsonresponse';
 
 const state = {
     categories : {},
-    subCategories : {},
-
 };
 
 const getters = {
@@ -22,9 +20,6 @@ const getters = {
         }
         return null;
     },
-    getSubCategories(state) {
-        return state.subCategories;
-    },
 };
 
   
@@ -34,9 +29,7 @@ const actions = {
         return sleep(2000)
         .then(() => {
             console.log('fetchCategories');
-            console.log(catJson);
             context.commit('setCategories',catJson);
-
         });      
     }
 };
@@ -44,9 +37,6 @@ const actions = {
 const mutations = {
     setCategories(state,payload) {
         state.categories = payload
-    },
-    setSubCategories(state,payload) {
-        state.subCategories = payload
     },
     setCategory(state,payload) {
         Vue.set(state.categories, payload.key, payload);

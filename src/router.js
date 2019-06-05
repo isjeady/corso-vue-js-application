@@ -3,6 +3,10 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Counter from './components/Counter.vue'
 
+
+const CategoryView = () => import(/* webpackChunkName: "item" */ '@/views/CategoryView.vue');
+const PostView = () => import(/* webpackChunkName: "item" */ '@/views/PostView.vue');
+
 Vue.use(Router)
 
 export default new Router({
@@ -20,12 +24,19 @@ export default new Router({
       name: 'counter',
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    }
+      path: '/blog/:key',
+      name: 'category',
+      component: CategoryView,
+      children: [
+        {
+          path: ':keytab',
+          name : 'post',
+          component: PostView
+        }
+      ]
+    },
   ]
 })
+
+
+

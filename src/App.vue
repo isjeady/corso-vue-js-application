@@ -3,27 +3,26 @@
     <div class="wrapper">
 
       <nav id="sidebar">
-        {{loading }}
+
           <a href="https://isjeady.com" target="_blank"><img src="https://isjeady.com/wp-content/uploads/2018/09/logoDEF.png" width="100%"></a>
           <loader :loading="loading" loaderText="Loading..."></loader>
           
           <div v-if="!loading">
-              <router-link tag="div" class="link" :to="{ name : 'home'}">Home</router-link>
+              <!-- <router-link tag="div" class="link" :to="{ name : 'home'}">Home</router-link>
               <router-link tag="div" class="link" :to="{ name : 'counter'}">Counter</router-link>
-              <hr>
-              
+               -->
               <template v-for="(rout,index) in categories">
                     <router-link tag="div" class="link" :to="'/blog/'+rout.key" :key="`menu_${index}`">
                       {{ rout.name }}
                     </router-link>
+                    <hr>
               </template>
 
           </div>
       </nav>
 
       <div id="content">
-        <loader :loading="loadingView" loaderText="Loading..."></loader>
-        <router-view v-if="!loadingView" />
+        <router-view />
       </div>
 
     </div>
@@ -43,16 +42,14 @@ export default {
   },
   data () {
     return {
-      loading : true,
-      loadingView : true
+      loading : true
     }
   },
   beforeMount() {
     this.fetchCategories().then(() => {
            this.loading = false;       
     }).catch((error) => {
-            this.loadingView = false;
-            //this.loading = false;         
+            this.loading = false;         
     });
   },
   computed : {
