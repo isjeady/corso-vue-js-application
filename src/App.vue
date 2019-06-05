@@ -4,11 +4,13 @@
 
       <nav id="sidebar">
           <a href="https://isjeady.com" target="_blank"><img src="https://isjeady.com/wp-content/uploads/2018/09/logoDEF.png" width="100%"></a>
-          <navigator></navigator>
+          <loader :loading="loading" loaderText="Loading..."></loader>
+          <navigator v-if="!loading"></navigator>
       </nav>
 
       <div id="content">
-        <router-view/>
+         <loader :loading="loading" loaderText="Loading..."></loader>
+        <router-view v-if="!loading" />
       </div>
 
     </div>
@@ -18,11 +20,19 @@
 
 
 <script>
+import Loader from '@/components/Loader.vue'
 import Navigator from '@/views/Navigator.vue'
+
 export default {
   name : 'app',
   components : {
-    Navigator
+    Navigator,
+    Loader
+  },
+  data () {
+    return {
+      loading : true
+    }
   }
 }
 </script>
