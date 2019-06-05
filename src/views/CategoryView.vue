@@ -1,6 +1,7 @@
 <template>
     <div>
-        <h1>CategoryView</h1>
+        <h1>CategoryView : {{ paramKey }}</h1>
+        <h1>{{ category }}</h1>
         <loader :loading="loading" loaderText="Loading..."></loader>  
     </div>
     
@@ -26,11 +27,20 @@ export default {
   
   },
   computed : {
-      /*
-        ...mapGetters({
-            'categories' : 'category/getCategories',
-        }),
-        */
+      paramKey: function() {
+          return this.$route.params.key;
+      },
+      ...mapGetters({
+            'getCategory' : 'category/getCategory',
+      }),
+      category: function() {
+        var c = this.getCategory(this.paramKey);
+        if(c){
+          return c;
+        }else{
+          this.$router.push('/');
+        }
+      },
   },
   methods : {
       /*

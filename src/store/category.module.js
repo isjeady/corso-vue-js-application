@@ -12,11 +12,12 @@ const getters = {
     },
     getCategory : (state,getters) => (paramKey) => {
         if(getters.getCategories){
-           if((paramKey.trim() in getters.getCategories)){
-               return getters.getCategories[paramKey];
-            }else{
-               return null;
-           }
+            let found = getters.getCategories.find(el => {return el.key == paramKey});
+            if(found){
+                return found;
+                }else{
+                return null;
+            }
         }
         return null;
     },
@@ -26,7 +27,7 @@ const getters = {
 const actions = {
     fetchCategories(context, payload) {
         //axios.get...GET API
-        return sleep(2000)
+        return sleep(100)
         .then(() => {
             console.log('fetchCategories');
             context.commit('setCategories',catJson);
