@@ -31,14 +31,12 @@ const getters = {
 const actions = {
     fetchCategories(context, payload) {
         //axios.get...GET API
-        sleep(1000)
+        return sleep(2000)
         .then(() => {
             console.log('fetchCategories');
             console.log(catJson);
             context.commit('setCategories',catJson);
-        })
-        .catch((error) => {
-            throw new Error(error);
+
         });      
     }
 };
