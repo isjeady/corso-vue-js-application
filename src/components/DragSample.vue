@@ -28,9 +28,12 @@
 
     <div class="row">
       <div class="col-8">
-          <li class="list-group-item" v-for="element in listClone" :key="element.key">
-            {{ element.key + ' - ' +element.name }}
-          </li>
+        <h3>Drag & Drop Area</h3>
+          <ul>
+            <li class="list-group-item" v-for="element in listClone" :key="element.key">
+              {{ element.key + ' - ' +element.name }}
+            </li>
+          </ul>
       </div>
       <div class="col-4">
         <h3>listValues</h3>
