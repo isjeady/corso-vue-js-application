@@ -5,12 +5,19 @@
       <nav id="sidebar">
           <a href="https://isjeady.com" target="_blank"><img src="https://isjeady.com/wp-content/uploads/2018/09/logoDEF.png" width="100%"></a>
           <loader :loading="loading" loaderText="Loading..."></loader>
-          <navigator v-if="!loading"></navigator>
+          <div v-if="!loading">
+
+              <router-link tag="div" class="link" :to="{ name : 'home'}">Home</router-link>
+              <router-link tag="div" class="link" :to="{ name : 'counter'}">Counter</router-link>
+              <hr>
+              {{ categories }}
+
+          </div>
       </nav>
 
       <div id="content">
-        <loader :loading="loading" loaderText="Loading..."></loader>
-        <router-view v-if="!loading" />
+        <loader :loading="loadingView" loaderText="Loading..."></loader>
+        <router-view v-if="!loadingView" />
       </div>
 
     </div>
@@ -21,22 +28,31 @@
 
 <script>
 import Loader from '@/components/Loader.vue'
-import Navigator from '@/views/Navigator.vue'
 import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name : 'app',
   components : {
-    Navigator,
     Loader
   },
   data () {
     return {
-      loading : true
+      loading : true,
+      loadingView : true
     }
   },
   beforeMount() {
-    this.fetchCategories();
+    this.fetchCategories().then(() => {
+            this.loading = false;       
+    }).catch((error) => {
+            this.loadingView = false;
+            this.loading = false;         
+    });
+  },
+  computed : {
+        ...mapGetters({
+            'categories' : 'category/getCategories',
+        }),
   },
   methods : {
       ...mapActions({
@@ -71,5 +87,16 @@ export default {
     padding:60px 60px 100px 60px;
     min-height: 50vh;
     box-sizing: border-box;
+}
+
+.link{
+  text-align: center;
+  cursor:pointer;
+  font-size: 24px;
+  transition: 0.3s;
+}
+.link:hover{
+  font-size: 28px;
+  color: green;
 }
 </style>

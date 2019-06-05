@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import {sleep} from '@/lib/util';
+import {catJson} from '@/jsonresponse';
 
 const state = {
     categories : {},
@@ -33,6 +34,8 @@ const actions = {
         sleep(1000)
         .then(() => {
             console.log('fetchCategories');
+            console.log(catJson);
+            context.commit('setCategories',catJson);
         })
         .catch((error) => {
             throw new Error(error);
