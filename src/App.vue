@@ -48,22 +48,28 @@ export default {
       loading : true
     }
   },
-  beforeMount() {
+  mounted() {
+    console.log('beforeMount');
     this.fetchCategories().then(() => {
-           this.loading = false;       
+      console.log(this.categories);
+      this.loading = false;       
     }).catch((error) => {
-            this.loading = false;         
+      this.loading = false;         
     });
   },
   computed : {
-        ...mapGetters({
-            'categories' : 'category/getCategories',
-        }),
+    ...mapGetters({
+        'categories' : 'category/getCategories',
+        'getCategory' : 'category/getCategory',
+        'getPosts' : 'post/getPosts',
+        'getPost' : 'post/getPost',
+    }),
   },
   methods : {
       ...mapActions({
           'fetchCategories' : 'category/fetchCategories',
-      }),
+          'fetchPosts' : 'post/fetchPosts',
+      })
   }
 }
 </script>

@@ -8,8 +8,6 @@
           </div>
           <img class="card-img-top" :src="post.img" alt="Card image cap">
         </div>
-        
-       
     </div>
 </template>
 
@@ -41,14 +39,9 @@ export default {
       ...mapGetters({
             'getPost' : 'post/getPost',
       }),
-
   },
   methods : {
-      /*
-      ...mapActions({
-          'fetchCategories' : 'category/fetchCategories',
-      }),
-      */
+
   }
 }
 </script>

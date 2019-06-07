@@ -37,7 +37,7 @@ const actions = {
 
 const mutations = {
     setCategories(state,payload) {
-        state.categories = payload
+        state.categories = payload;
     },
     setCategory(state,payload) {
         Vue.set(state.categories, payload.key, payload);

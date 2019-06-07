@@ -2,9 +2,7 @@
     <div v-if="category">
         <h1>{{ category.name }}</h1>
         <h4>{{ category.description }}</h4>
-        <loader :loading="loading" loaderText="Loading..."></loader>  
-        <div v-if="!loading">
-          
+        <div v-if="getPosts.length > 0">
           <nav class="nav">
             <a class="nav-link disabled" href="#">Posts</a>
             <template v-for="(post,index) in getPosts">
@@ -13,9 +11,9 @@
                 </router-link>
             </template>
           </nav>
-
           <router-view></router-view>
         </div>
+        <loader :loading="getPosts.length == 0" loaderText="Loading..."></loader>  
     </div>
 </template>
 
@@ -23,6 +21,7 @@
 <script>
 import Loader from '@/components/Loader.vue'
 import {mapGetters, mapActions} from 'vuex'
+import store from '../store'
 
 export default {
   name : 'app',
@@ -34,8 +33,12 @@ export default {
       loading : true,
     }
   },
-  created() {
-        this.checkPost();
+  mounted() {
+    this.fetchBeforeRoute(this.$route.params.key,this.$route.params.keypost);
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.fetchBeforeRoute(to.params.key,to.params.keypost);
+    next();
   },
   computed : {
       paramKey: function() {
@@ -44,44 +47,36 @@ export default {
       ...mapGetters({
             'getCategory' : 'category/getCategory',
             'getPosts' : 'post/getPosts',
-            'categories' : 'category/getCategories',
+            'getPost' : 'post/getPost',
       }),
       category: function() {
         return this.getCategory(this.paramKey);
       },
   },
-  watch : {
-    /*
-      '$route' (to,from){
-        console.log('watch');
-          if(this.categories){
-            let category = this.getCategory(to.params.key);
-            if(category){
-
-            }else{
-              this.$router.push('/');
-            }
-          }
-      }
-      */
-  },
   methods : {
       ...mapActions({
           'fetchPosts' : 'post/fetchPosts',
+           'fetchCategories' : 'category/fetchCategories',
       }),
-      checkPost(){
-        let category = this.getCategory(this.paramKey);
-        console.log('checkPost');
-        console.log(category);
-        if(!category){
-          this.$router.push('/');
-        }else{
-          this.fetchPosts({cat: category.id}).then(() => {
-                this.loading = false;       
-          }).catch((error) => {
-                this.loading = false;         
-          })
-        }
+      fetchBeforeRoute(catKey,postKey){
+          console.log('fetchBeforeRoute:' + catKey);
+          this.fetchCategories().then(() => {
+            let category = this.getCategory(catKey);
+            if(!category){
+              console.log('category NOT FOUND');
+              this.$router.push('/');
+            }else{
+              //fetch dei post per la categoria
+              this.fetchPosts({cat: category.id}).then(() => {
+                let post = this.getPosts[0]; 
+                if(postKey)post = this.getPost(postKey);
+                  if(post)
+                    this.$router.replace(`/blog/${category.key}/${post.key}`);    
+                  else
+                    this.$router.push('/');
+              });
+            }
+          });
       }
   }
 }
