@@ -34,10 +34,7 @@ export default {
       loading : true,
     }
   },
-  mounted() {
-        this.checkPost();
-  },
-  updated() {
+  created() {
         this.checkPost();
   },
   computed : {
@@ -47,22 +44,40 @@ export default {
       ...mapGetters({
             'getCategory' : 'category/getCategory',
             'getPosts' : 'post/getPosts',
+            'categories' : 'category/getCategories',
       }),
       category: function() {
         return this.getCategory(this.paramKey);
       },
+  },
+  watch : {
+    /*
+      '$route' (to,from){
+        console.log('watch');
+          if(this.categories){
+            let category = this.getCategory(to.params.key);
+            if(category){
+
+            }else{
+              this.$router.push('/');
+            }
+          }
+      }
+      */
   },
   methods : {
       ...mapActions({
           'fetchPosts' : 'post/fetchPosts',
       }),
       checkPost(){
-        if(!this.getCategory(this.paramKey)){
+        let category = this.getCategory(this.paramKey);
+        console.log('checkPost');
+        console.log(category);
+        if(!category){
           this.$router.push('/');
         }else{
-          var category = this.getCategory(this.paramKey);
           this.fetchPosts({cat: category.id}).then(() => {
-                  this.loading = false;       
+                this.loading = false;       
           }).catch((error) => {
                 this.loading = false;         
           })
