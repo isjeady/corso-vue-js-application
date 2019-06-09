@@ -44,7 +44,7 @@ export default {
   },
   mounted() {
     this.fetchCategories().then(() => {
-      if(!this.getCategory(this.$route.params.key)){
+      if(this.$route.params.key && !this.getCategory(this.$route.params.key)){
         this.$router.push({ name : 'notfound'});
       }
       this.loading = false;       
