@@ -15,7 +15,7 @@ const getters = {
             let found = getters.getCategories.find(el => {return el.key == paramKey});
             if(found){
                 return found;
-                }else{
+            }else{
                 return null;
             }
         }

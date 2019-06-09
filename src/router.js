@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import NotFound from './views/NotFound.vue'
 import Counter from './components/Counter.vue'
 
 
@@ -19,6 +20,11 @@ export default new Router({
       component: Home
     },
     {
+      path: '/404',
+      name: 'notfound',
+      component: NotFound
+    },
+    {
       path: '/counter',
       component: Counter,
       name: 'counter',
@@ -34,7 +40,7 @@ export default new Router({
           component: PostView
         }
       ]
-    },
+    }
   ]
 })
 

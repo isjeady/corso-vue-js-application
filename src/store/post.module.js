@@ -15,7 +15,7 @@ const getters = {
             let found = getters.getPosts.find(el => {return el.key == paramKey});
             if(found){
                 return found;
-                }else{
+            }else{
                 return null;
             }
         }
@@ -28,7 +28,7 @@ const actions = {
     fetchPosts(context, payload) {
         //axios.get...GET API
         //get post category 1
-        return sleep(100)
+        return sleep(500)
         .then(() => {
             console.log('fetchPosts Category:'  + payload.cat);
             if(payload.cat == 1){

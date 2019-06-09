@@ -1,4 +1,6 @@
 <template>
+<div>
+    <h1>Post</h1>
     <div v-if="post">
         <div class="card mb-3">
           <div class="card-body">
@@ -9,39 +11,25 @@
           <img class="card-img-top" :src="post.img" alt="Card image cap">
         </div>
     </div>
+</div>
 </template>
 
 
 <script>
-import Loader from '@/components/Loader.vue'
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name : 'app',
-  components : {
-    Loader
-  },
-  data () {
-    return {
-      loading : true,
-    }
-  },
-  beforeMount() {
-  
-  },
   computed : {
       paramKey: function() {
           return this.$route.params.keypost;
       },
-       post: function() {
+      post: function() {
         return this.getPost(this.paramKey);
       },
       ...mapGetters({
             'getPost' : 'post/getPost',
       }),
-  },
-  methods : {
-
   }
 }
 </script>

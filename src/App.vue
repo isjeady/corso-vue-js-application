@@ -3,7 +3,6 @@
     <div class="wrapper">
 
       <nav id="sidebar">
-
           <router-link tag="a" :to="'/'">
            <img src="https://isjeady.com/wp-content/uploads/2018/09/logoDEF.png" width="100%">
           </router-link>
@@ -11,16 +10,12 @@
           <loader :loading="loading" loaderText="Loading..."></loader>
           
           <div v-if="!loading">
-              <!-- <router-link tag="div" class="link" :to="{ name : 'home'}">Home</router-link>
-              <router-link tag="div" class="link" :to="{ name : 'counter'}">Counter</router-link>
-               -->
               <template v-for="(rout,index) in categories">
                     <router-link tag="div" class="link" :to="'/blog/'+rout.key" :key="`menu_${index}`">
                       {{ rout.name }}
                     </router-link>
                     <hr>
               </template>
-
           </div>
       </nav>
 
@@ -29,7 +24,6 @@
       </div>
 
     </div>
-    
   </div>
 </template>
 
@@ -49,9 +43,10 @@ export default {
     }
   },
   mounted() {
-    console.log('beforeMount');
     this.fetchCategories().then(() => {
-      console.log(this.categories);
+      if(!this.getCategory(this.$route.params.key)){
+        this.$router.push({ name : 'notfound'});
+      }
       this.loading = false;       
     }).catch((error) => {
       this.loading = false;         
@@ -61,14 +56,11 @@ export default {
     ...mapGetters({
         'categories' : 'category/getCategories',
         'getCategory' : 'category/getCategory',
-        'getPosts' : 'post/getPosts',
-        'getPost' : 'post/getPost',
     }),
   },
   methods : {
       ...mapActions({
-          'fetchCategories' : 'category/fetchCategories',
-          'fetchPosts' : 'post/fetchPosts',
+          'fetchCategories' : 'category/fetchCategories'
       })
   }
 }

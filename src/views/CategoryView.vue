@@ -1,27 +1,48 @@
 <template>
-    <div v-if="category">
+<div>
+  <template v-if="!paramKeyPost">
         <h1>{{ category.name }}</h1>
         <h4>{{ category.description }}</h4>
-        <div v-if="getPosts.length > 0">
-          <nav class="nav">
-            <a class="nav-link disabled" href="#">Posts</a>
-            <template v-for="(post,index) in getPosts">
-                <router-link tag="a" class="nav-link" :to="{ name : 'post' , params : { keypost : post.key}}" :key="'menu' + index" >
-                    {{ post.name }}
-                </router-link>
-            </template>
-          </nav>
-          <router-view></router-view>
+        <hr>
+        <loader :loading="loading" loaderText="Loading..."></loader>  
+        <div v-if="!loading">
+            <div class="row" v-for="(post,index) in getPosts" :key="'card' + index" >
+              <div class="col-8">
+                <div class="card" style="margin-bottom:50px;padding:10px;">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-8">
+                        <h5 class="card-title">{{ post.name | truncate(70) }}</h5>
+                        <p class="card-text">{{ post.description | truncate(200) }}</p>
+                        <router-link tag="a" class="btn btn-primary" :to="{ name : 'post' , params : { keypost : post.key}}" :key="'menu' + index" >
+                            View...
+                        </router-link>
+                      </div>
+                      <div class="col-4">
+                        <img class="card-img-top" :src="post.img" height="150px;">
+                      </div>
+                    </div>
+                     
+                  </div>
+                </div>
+              </div>
+            </div>
+           
         </div>
-        <loader :loading="getPosts.length == 0" loaderText="Loading..."></loader>  
-    </div>
+  </template>
+
+  <template v-else>
+    <loader :loading="loading" loaderText="Loading..."></loader>
+    <router-view v-if="!loading"></router-view>
+  </template>
+    
+</div>
 </template>
 
 
 <script>
 import Loader from '@/components/Loader.vue'
 import {mapGetters, mapActions} from 'vuex'
-import store from '../store'
 
 export default {
   name : 'app',
@@ -34,15 +55,14 @@ export default {
     }
   },
   mounted() {
-    this.fetchBeforeRoute(this.$route.params.key,this.$route.params.keypost);
-  },
-  beforeRouteUpdate(to, from, next) {
-    this.fetchBeforeRoute(to.params.key,to.params.keypost);
-    next();
+    this.checkPost();
   },
   computed : {
       paramKey: function() {
           return this.$route.params.key;
+      },
+      paramKeyPost: function() {
+          return this.$route.params.keypost;
       },
       ...mapGetters({
             'getCategory' : 'category/getCategory',
@@ -53,30 +73,27 @@ export default {
         return this.getCategory(this.paramKey);
       },
   },
+  watch: {
+    category: function (val,old) {
+      this.checkPost();
+    },
+  },
   methods : {
       ...mapActions({
           'fetchPosts' : 'post/fetchPosts',
-           'fetchCategories' : 'category/fetchCategories',
       }),
-      fetchBeforeRoute(catKey,postKey){
-          console.log('fetchBeforeRoute:' + catKey);
-          this.fetchCategories().then(() => {
-            let category = this.getCategory(catKey);
-            if(!category){
-              console.log('category NOT FOUND');
-              this.$router.push('/');
-            }else{
-              //fetch dei post per la categoria
-              this.fetchPosts({cat: category.id}).then(() => {
-                let post = this.getPosts[0]; 
-                if(postKey)post = this.getPost(postKey);
-                  if(post)
-                    this.$router.replace(`/blog/${category.key}/${post.key}`);    
-                  else
-                    this.$router.push('/');
-              });
-            }
+      checkPost(){
+        if(this.category){
+          this.loading = true;
+          this.fetchPosts({cat: this.category.id}).then(() => {
+              if(this.paramKeyPost && !this.getPost(this.paramKeyPost)){
+                this.$router.push({ name : 'notfound'});
+              }
+              this.loading = false;       
+          }).catch((error) => {
+              this.loading = false;         
           });
+        }
       }
   }
 }
