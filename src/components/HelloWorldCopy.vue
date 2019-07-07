@@ -4,7 +4,6 @@
     
     <div class="row">
       <div class="col-md-3">
-        <button class="btn btn-success" @click="names.push('Leandro')">ADD</button>
         <input v-model="search">
         <ul>
           <li v-for="name in filterNames" :key="name">
@@ -20,13 +19,13 @@
 <script>
 import { listMixin } from '../mixin';
 export default {
-  name: 'HelloWorld',
+  name: 'HelloWorldCopy',
   props: {
     msg: String
   },
   mixins : [listMixin],
   created(){
-        console.log('3-Created by Hellowor');
+        console.log('3-Created by Hellowor COPY');
   }
 }
 </script>
