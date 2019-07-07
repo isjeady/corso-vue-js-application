@@ -12,6 +12,9 @@ export default {
   name : 'app',
   components : {
     Navigator
+  },
+  created(){
+    this.$store.dispatch('autoLogin');
   }
 }
 </script>
