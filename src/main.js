@@ -10,6 +10,9 @@ axios.defaults.headers.get['Accepts'] = 'application/json';
 
 Vue.config.productionTip = false
 
+import Vuelidate from 'vuelidate';
+Vue.use(Vuelidate);
+
 new Vue({
   router,
   store,

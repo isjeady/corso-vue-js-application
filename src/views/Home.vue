@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Auth with Token"/>
+    <HelloWorld msg="Validation"/>
   </div>
 </template>
 
