@@ -32,6 +32,7 @@ export default new Router({
         if(store.getters.isAuth){
           next('/dashboard');
         }
+        next();
       }
     },
     {
@@ -42,6 +43,7 @@ export default new Router({
         if(store.getters.isAuth){
           next('/dashboard');
         }
+        next();
       }
     },
     {
@@ -54,6 +56,7 @@ export default new Router({
         }else{
           next('/login');
         }
+        next();
       }
     },
     {
