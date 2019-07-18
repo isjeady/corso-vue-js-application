@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '@/axios-auth';
 import gAxios from 'axios';
-
+import * as ApiService from '@/helpers/api.service'
 import router from './router';
 
 Vue.use(Vuex)
@@ -40,7 +40,7 @@ export default new Vuex.Store({
       router.push('/login');
     },
     register({commit,dispatch},formData){
-      axios.post('/signupNewUser?key=AIzaSyA_IwkA6WwtR2Px_L2AanXt5GbDn48rLBE',
+      ApiService.post('/signupNewUser',
       {
         email : formData.email,
         password : formData.password,
@@ -59,7 +59,7 @@ export default new Vuex.Store({
       .catch(error => console.log(error));
     },
     login({commit,dispatch},formData){
-      axios.post('/verifyPassword?key=AIzaSyA_IwkA6WwtR2Px_L2AanXt5GbDn48rLBE',
+      ApiService.post('/verifyPassword',
       {
         email : formData.email,
         password : formData.password,
