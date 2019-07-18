@@ -7,7 +7,13 @@
 
 
 <script>
+import * as ApiService from '@/helpers/api.service'
 import Navigator from '@/views/Navigator.vue'
+
+ApiService.init();
+
+
+
 export default {
   name : 'app',
   components : {
